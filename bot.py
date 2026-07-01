@@ -1,11 +1,22 @@
 import feedparser
 import requests
 import os
+import random
 from datetime import datetime, timezone, timedelta
 
 DISCORD_WEBHOOK = os.environ["DISCORD_WEBHOOK"]
 USERNAME = "trickcal_en"
 VN_TZ = timezone(timedelta(hours=7))
+ROLE_ID = os.environ.get("DISCORD_ROLE_ID", "1436532654479642685")
+
+MESSAGES = [
+    "Trickcal_EN có thông báo mới! Trông có vẻ không có gì đặc biệt lắm. Chả biết nữa. Kommy đi ngủ.",
+    "📢 Đây là Kommy từ Mochi FM. Kommy có thông báo muốn chia sẻ tới mọi người, nya.",
+    "Có thông báo mới từ Trickal_EN. Kommy hi vọng họ báo rằng có thức ăn đóng hộp trên trời rơi xuống, nyahaha",
+    "Trickal_EN vừa đăng tải thông tin mới. Kommy đã đọc... trông cũng hay phết",
+    "đố mọi người biết báo gì chạy nhanh nhất? Chính là thông báo đến từ Mochi FM, nyahaha... ugh, sao mọi người lại nhìn Kommy như thế?",
+    "Kommy từ Mochi FM đây. Bản tin hôm nay sẽ có sự đồng hành cùng Giáo Chủ. Vậy nhé, Kommy đi chơi với Butter đây",
+]
 
 RSS_SOURCES = [
     f"https://nitter.net/{USERNAME}/rss",
@@ -83,9 +94,11 @@ if new_posts:
         link = post.link
         for d in ["nitter.net","nitter.poast.org","nitter.rawbit.ninja","nitter.privacydev.net"]:
             link = link.replace(d, "x.com")
+        msg = random.choice(MESSAGES)
         r = requests.post(DISCORD_WEBHOOK, json={
-            "content": link,
+            "content": f"<@&{ROLE_ID}> {msg}\n{link}",
             "username": "Mochi FM",
+            "allowed_mentions": {"parse": ["roles"]}
         })
         print(f"Discord: {r.status_code} → {link}")
 
