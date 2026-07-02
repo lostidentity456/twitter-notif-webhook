@@ -10,12 +10,7 @@ VN_TZ = timezone(timedelta(hours=7))
 ROLE_ID = os.environ.get("DISCORD_ROLE_ID", "1436532654479642685")
 
 MESSAGES = [
-    "Trickcal_EN có thông báo mới! Trông có vẻ không có gì đặc biệt lắm. Chả biết nữa. Kommy đi ngủ.",
-    "📢 Đây là Kommy từ Mochi FM. Kommy có thông báo muốn chia sẻ tới mọi người, nya.",
-    "Có thông báo mới từ Trickal_EN. Kommy hi vọng họ báo rằng có thức ăn đóng hộp trên trời rơi xuống, nyahaha",
-    "Trickal_EN vừa đăng tải thông tin mới. Kommy đã đọc... trông cũng hay phết",
-    "đố mọi người biết báo gì chạy nhanh nhất? Chính là thông báo đến từ Mochi FM, nyahaha... ugh, sao mọi người lại nhìn Kommy như thế?",
-    "Kommy từ Mochi FM đây. Bản tin hôm nay sẽ có sự đồng hành cùng Giáo Chủ. Vậy nhé, Kommy đi chơi với Butter đây",
+    "📢 Trickal_EN có thông báo mới! <a:Kommy_lick:1435193595438039040>"
 ]
 
 RSS_SOURCES = [
@@ -96,7 +91,7 @@ if new_posts:
             link = link.replace(d, "x.com")
         msg = random.choice(MESSAGES)
         r = requests.post(DISCORD_WEBHOOK, json={
-            "content": f"<@&{ROLE_ID}> {msg}\n{link}",
+            "content": f"{msg}\n{link}",
             "username": "Mochi FM",
             "allowed_mentions": {"parse": ["roles"]}
         })
