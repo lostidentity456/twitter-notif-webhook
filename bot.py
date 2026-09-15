@@ -17,7 +17,7 @@ MESSAGES = [
 ]
 
 RSS_SOURCES = [
-    f"https://vxtwitter.com/{USERNAME}/feed.xml",
+    f"https://fxtwitter.com/{USERNAME}/feed.xml",
 ]
 
 # Khung giờ an toàn (phút VN) — khớp lịch cron-job.org thực tế (tight+sparse: 9:00–19:40)
