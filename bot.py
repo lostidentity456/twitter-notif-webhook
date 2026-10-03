@@ -17,7 +17,7 @@ MESSAGES = [
 ]
 
 RSS_SOURCES = [
-    f"https://vxtwitter.com/{USERNAME}/feed.xml",
+    f"https://fxtwitter.com/{USERNAME}/feed.xml",
 ]
 
 # Khung giờ an toàn (phút VN) — khớp lịch cron-job.org thực tế (tight+sparse: 9:00–19:40)
@@ -88,9 +88,9 @@ print(f"Bài mới: {len(new_posts)}")
 if new_posts:
     for post in reversed(new_posts):
         link = post.link
-        if "fxtwitter.com" not in link:
+        if "vxtwitter.com" not in link:
             for d in ["twitter.com", "x.com"]:
-                link = link.replace(f"://{d}", "://fxtwitter.com")
+                link = link.replace(f"://{d}", "://vxtwitter.com")
         for i, webhook in enumerate(DISCORD_WEBHOOKS, 1):
             msg = random.choice(MESSAGES)
             r = requests.post(webhook, json={
